@@ -22,6 +22,8 @@ public class Tile : MonoBehaviour
     {
         render = GetComponent<SpriteRenderer>();
         mBoard = GetComponentInParent<Board>();
+        mIsSwaping = false;
+        previousSelected = null;
     }
 
     private void Select()
