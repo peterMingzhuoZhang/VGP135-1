@@ -107,22 +107,22 @@ public class Board : MonoBehaviour
         int nullCount = 0;
 
         for (int y = yStart; y < ySize; y++)
-        {  // 1
+        {
             SpriteRenderer render = tiles[x, y].GetComponent<SpriteRenderer>();
             if (render.sprite == null)
-            { // 2
+            { 
                 nullCount++;
             }
             renders.Add(render);
         }
 
         for (int i = 0; i < nullCount; i++)
-        { // 3
+        { 
             SetScore(50);
 
             yield return new WaitForSeconds(shiftDelay);// 4
             for (int k = 0; k < renders.Count - 1; k++)
-            { // 5
+            { 
                 renders[k].sprite = renders[k + 1].sprite;
                 renders[k + 1].sprite = GetNewSprite(x, ySize - 1);
             }

@@ -47,54 +47,55 @@ public class Tile : MonoBehaviour
         }
 
         if (isSelected)
-        { // 2 Is it already selected?
+        { 
             Deselect();
         }
         else
         {
             if (previousSelected == null)
-            { // 3 Is it the first tile selected?
+            { 
                 Select();
             }
             else
             {
                 if (GetAllAdjacentTiles().Contains(previousSelected.gameObject))
-                { // 1
-                    StartCoroutine(SwapTile(previousSelected));
+                {
+                    //StartCoroutine(SwapTile(previousSelected));
 
-                    //SwapSprite(previousSelected.render); // 2
-                    //previousSelected.ClearAllMatches();
-                    //
-                    //previousSelected.Deselect();
-                    //ClearAllMatches();
+                    SwapSprite(previousSelected.render);
+                    previousSelected.ClearAllMatches();
+                    
+                    previousSelected.Deselect();
+                    ClearAllMatches();
 
                 }
                 else
-                { // 3
+                {
                     previousSelected.GetComponent<Tile>().Deselect();
                     Select();
                 }
             }
             
         }
+        previousSelected?.ClearAllMatches();
     }
 
     public void SwapSprite(SpriteRenderer render2)
-    { // 1
+    {
         if (render.sprite == render2.sprite)
-        { // 2
+        {
             return;
         }
 
-        Sprite tempSprite = render2.sprite; // 3
-        render2.sprite = render.sprite; // 4
-        render.sprite = tempSprite; // 5
+        Sprite tempSprite = render2.sprite;
+        render2.sprite = render.sprite;
+        render.sprite = tempSprite;
 
         mBoard.SetMoveCount(-1);
     }
 
     public IEnumerator SwapTile(Tile other)
-    { // 1
+    {
         mIsSwaping = true;
         Vector3 pos0 = transform.position;
         Vector3 pos1 = other.transform.position;
@@ -139,31 +140,31 @@ public class Tile : MonoBehaviour
     }
 
     private List<GameObject> FindMatch(Vector2 castDir)
-    { // 1
-        List<GameObject> matchingTiles = new List<GameObject>(); // 2
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, castDir); // 3
+    {
+        List<GameObject> matchingTiles = new List<GameObject>(); 
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, castDir);
         while (hit.collider != null && hit.collider.GetComponent<SpriteRenderer>().sprite == render.sprite)
-        { // 4
+        {
             matchingTiles.Add(hit.collider.gameObject);
             hit = Physics2D.Raycast(hit.collider.transform.position, castDir);
         }
-        return matchingTiles; // 5
+        return matchingTiles;
     }
 
-    private void ClearMatch(Vector2[] paths) // 1
+    private void ClearMatch(Vector2[] paths)
     {
-        List<GameObject> matchingTiles = new List<GameObject>(); // 2
-        for (int i = 0; i < paths.Length; i++) // 3
+        List<GameObject> matchingTiles = new List<GameObject>();
+        for (int i = 0; i < paths.Length; i++)
         {
             matchingTiles.AddRange(FindMatch(paths[i]));
         }
-        if (matchingTiles.Count >= 2) // 4
+        if (matchingTiles.Count >= 2)
         {
-            for (int i = 0; i < matchingTiles.Count; i++) // 5
+            for (int i = 0; i < matchingTiles.Count; i++)
             {
                 matchingTiles[i].GetComponent<SpriteRenderer>().sprite = null;
             }
-            matchFound = true; // 6
+            matchFound = true;
         }
     }
 
