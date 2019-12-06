@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Goal!
+  m_Text: 'Score:'
 --- !u!1 &1200767815627783074
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,11 +125,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1200767815627783074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad61b6dba269e0d43a8a24b5d780abe8, type: 3}
+  m_Script: {fileID: 11500000, guid: a1818bff99e4ec944a310b128f6f1041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelSelectSceneName: LevelSelect
-  goalMenuHolder: {fileID: 4394561949991961850}
+  mainMenuSceneName: Menu
+  MenuHolder: {fileID: 4394561949991961850}
+  mScore: {fileID: 1200767814598715987}
 --- !u!1 &4394561949991961850
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,66 +285,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4127051947828859647, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947828859647, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947828859647, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947828859647, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947828859647, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947828859647, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947164865444, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947164865444, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947164865444, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947164865444, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947164865444, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127051947164865444, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4127051947828859640, guid: ce4dc792537f80b40ad94c196b94b65a,
         type: 3}
       propertyPath: m_Name
@@ -359,11 +300,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1252872467850152371}
-    - target: {fileID: 4127051947828859646, guid: ce4dc792537f80b40ad94c196b94b65a,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayAgainButtonDown
-      objectReference: {fileID: 0}
     - target: {fileID: 4127051947164865445, guid: ce4dc792537f80b40ad94c196b94b65a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -377,7 +313,7 @@ PrefabInstance:
     - target: {fileID: 4127051948020263930, guid: ce4dc792537f80b40ad94c196b94b65a,
         type: 3}
       propertyPath: m_Text
-      value: Level Select
+      value: Main Menu
       objectReference: {fileID: 0}
     - target: {fileID: 4127051947509295777, guid: ce4dc792537f80b40ad94c196b94b65a,
         type: 3}

@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GoalMenu : MonoBehaviour
+public class GameOverMenu : MonoBehaviour
 {
-    public string levelSelectSceneName;
-    public GameObject goalMenuHolder;
+    public string mainMenuSceneName;
+    public GameObject MenuHolder;
+
+    public Text mScore;
 
     void Start()
     {
@@ -15,7 +18,7 @@ public class GoalMenu : MonoBehaviour
 
     public void SetGoalMenu(bool value)
     {
-        goalMenuHolder.SetActive(value);
+        MenuHolder.SetActive(value);
     }
 
     public void PlayAgainButtonDown()
@@ -25,6 +28,6 @@ public class GoalMenu : MonoBehaviour
 
     public void LevelSelectButtonDown()
     {
-        SceneManager.LoadScene(levelSelectSceneName);
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 }

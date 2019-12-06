@@ -339,7 +339,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Puttacular
+  m_Text: Match 3
 --- !u!222 &931617949
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e2999fe402fd541babfb411ee7634f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScene: LevelSelect
+  startScene: InGame
 --- !u!4 &1002052431
 Transform:
   m_ObjectHideFlags: 0

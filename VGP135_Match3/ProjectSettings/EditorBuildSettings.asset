@@ -9,21 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 0a70ca3e1241bb640af1212268346bc1
   - enabled: 1
-    path: Assets/Scenes/LevelSelect.unity
-    guid: 061a8c8903e7c97488d6a63a927d9496
-  - enabled: 1
-    path: Assets/Scenes/Level1.unity
-    guid: c48a1757bdec3134785418296b888963
-  - enabled: 1
-    path: Assets/Scenes/Level2.unity
-    guid: af66dc6a2b32df848ad0667545abc047
-  - enabled: 1
-    path: Assets/William/William_Level3.unity
-    guid: 34e4a72b9551a344eb6a2d81aa29f97b
-  - enabled: 1
-    path: Assets/William/William_Level4.unity
-    guid: 26d6416c0e4442e41b820745de0ef4c8
-  - enabled: 1
-    path: Assets/William/William_Level5.unity
-    guid: 5c1e3297f2b9d724fadeb974c07417ef
+    path: Assets/Scenes/InGame.unity
+    guid: e0d0a4ab57cf1e94bbea5c90b8f42b80
   m_configObjects: {}

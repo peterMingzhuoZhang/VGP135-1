@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
-    public GameObject mGameOverMenu;
+    public GameOverMenu mGameOverMenu;
     public Text mScoreText;
     public Text mMoveCountText;
 
@@ -42,17 +42,10 @@ public class InGameUI : MonoBehaviour
     public void GameOver()
     {
         //GameManager.instance.gameOver = true;
-
-        mGameOverMenu.SetActive(true);
-        
-        // TODO set su the score in the gameovermenu
+        mGameOverMenu.SetGoalMenu(true);
+        mGameOverMenu.mScore.text = "Score: " + mScore;
 
     }
 
-    //private IEnumerator WaitForShifting()                                         //|
-    //{                                                                             //|
-    //    yield return new WaitUntil(() => !BoardManager.instance.IsShifting);      //|--- TODO: Move to Board
-    //    yield return new WaitForSeconds(.25f);                                    //|
-    //    GameOver();                                                               //|
-    //}                                                                             //|
+                                                                             //|
 }

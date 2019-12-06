@@ -5,7 +5,7 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     public InGameUI mInGameUI;
-    public List<Sprite> tilesSprite = new List<Sprite>();
+    public List<Sprite> characters = new List<Sprite>();
     public GameObject tile;
     public int xSize, ySize;
 
@@ -13,18 +13,13 @@ public class Board : MonoBehaviour
 
     public bool IsShifting { get; set; }
 
-    public int mPreviousSelectedTileIndex = -1;
-
-    public int mMoveCount = 10;
     public int mScore = 0;
+    public int mMoveCount = 10;
 
-
-    private Vector2 tileOffset;
     void Start()
     {
-        tileOffset = tile.GetComponent<SpriteRenderer>().bounds.size;
-        CreateBoard(tileOffset.x, tileOffset.y);
-
+        Vector2 offset = tile.GetComponent<SpriteRenderer>().bounds.size;
+        CreateBoard(offset.x, offset.y);
         SetScore(0);
         SetMoveCount(0);
     }
@@ -39,6 +34,14 @@ public class Board : MonoBehaviour
     {
         mMoveCount += value;
         mInGameUI.MoveCount = mMoveCount;
+
+        if (mMoveCount <= 0)                            
+        {                                               
+            mMoveCount = 0;
+
+            mInGameUI.GameOver();
+            gameObject.SetActive(false);
+        }                                                                                   
     }
 
     private void CreateBoard(float xOffset, float yOffset)
@@ -60,7 +63,7 @@ public class Board : MonoBehaviour
                 newTile.transform.parent = transform; // 1
 
                 List<Sprite> possibleCharacters = new List<Sprite>(); // 1
-                possibleCharacters.AddRange(tilesSprite); // 2
+                possibleCharacters.AddRange(characters); // 2
 
                 possibleCharacters.Remove(previousLeft[y]); // 3
                 possibleCharacters.Remove(previousBelow);
@@ -92,17 +95,15 @@ public class Board : MonoBehaviour
         {
             for (int y = 0; y < ySize; y++)
             {
-                while (IsShifting) ;
                 tiles[x, y].GetComponent<Tile>().ClearAllMatches();
             }
         }
-
     }
 
     private IEnumerator ShiftTilesDown(int x, int yStart, float shiftDelay = .03f)
     {
         IsShifting = true;
-        List<GameObject> moveDownTiles = new List<GameObject>();
+        List<SpriteRenderer> renders = new List<SpriteRenderer>();
         int nullCount = 0;
 
         for (int y = yStart; y < ySize; y++)
@@ -112,33 +113,27 @@ public class Board : MonoBehaviour
             { // 2
                 nullCount++;
             }
-            moveDownTiles.Add(tiles[x, y]);
+            renders.Add(render);
         }
 
         for (int i = 0; i < nullCount; i++)
         { // 3
-            SetScore(+50);
-            var newSprite = GetNewSprite(x, ySize - 1);
-            moveDownTiles[i].GetComponent<SpriteRenderer>().sprite = newSprite;
-           // moveDownTiles[i].GetComponent<Tile>().mInBoardIndex = x * ySize + ySize - (nullCount - i);      // Get the InBoundCount
-            moveDownTiles[i].transform.position = tiles[x, ySize - 1].transform.position + new Vector3(0.0f, tileOffset.y * (i + 1), 0.0f);
+            SetScore(50);
 
+            yield return new WaitForSeconds(shiftDelay);// 4
+            for (int k = 0; k < renders.Count - 1; k++)
+            { // 5
+                renders[k].sprite = renders[k + 1].sprite;
+                renders[k + 1].sprite = GetNewSprite(x, ySize - 1);
+            }
         }
-        //for (int k = 0; k < moveDownTiles.Count; k++)
-        //{ // 5
-        //    moveDownTiles[k].transform.position = moveDownTiles[k].transform.position - new Vector3(0.0f, tileOffset.y * nullCount, 0.0f);
-        //    //moveDownTiles[k].GetComponent<Tile>().mInBoardIndex = 
-        //}
-        yield return new WaitForSeconds(shiftDelay);// 4
-        Debug.Log("shift finished")
-;
         IsShifting = false;
     }
 
     private Sprite GetNewSprite(int x, int y)
     {
         List<Sprite> possibleCharacters = new List<Sprite>();
-        possibleCharacters.AddRange(tilesSprite);
+        possibleCharacters.AddRange(characters);
 
         if (x > 0)
         {
@@ -155,4 +150,5 @@ public class Board : MonoBehaviour
 
         return possibleCharacters[Random.Range(0, possibleCharacters.Count)];
     }
+
 }
