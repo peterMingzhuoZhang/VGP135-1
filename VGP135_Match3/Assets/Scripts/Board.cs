@@ -39,6 +39,7 @@ public class Board : MonoBehaviour
     {
         mMoveCount += value;
         mInGameUI.MoveCount = mMoveCount;
+
     }
 
     private void CreateBoard(float xOffset, float yOffset)
