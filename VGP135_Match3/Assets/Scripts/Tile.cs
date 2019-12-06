@@ -16,7 +16,7 @@ public class Tile : MonoBehaviour
     private bool matchFound = false;
 
     private float mSwapSpeed = 10.0f;
-    private bool mIsSwaping = false;
+    private static bool mIsSwaping = false;
 
     void Start()
     {
@@ -40,7 +40,6 @@ public class Tile : MonoBehaviour
 
     void OnMouseDown()
     {
-        // 1
         if (render.sprite == null || mBoard.IsShifting || mIsSwaping)
         {
             return;
@@ -60,14 +59,8 @@ public class Tile : MonoBehaviour
             {
                 if (GetAllAdjacentTiles().Contains(previousSelected.gameObject))
                 {
-                    //StartCoroutine(SwapTile(previousSelected));
-
-                    SwapSprite(previousSelected.render);
-                    previousSelected.ClearAllMatches();
-                    
-                    previousSelected.Deselect();
-                    ClearAllMatches();
-
+                    StartCoroutine(SwapTile(previousSelected));
+                    //SwapSprite(previousSelected.render);
                 }
                 else
                 {
@@ -97,24 +90,26 @@ public class Tile : MonoBehaviour
     public IEnumerator SwapTile(Tile other)
     {
         mIsSwaping = true;
-        Vector3 pos0 = transform.position;
-        Vector3 pos1 = other.transform.position;
+        Vector3 pos0 = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        Vector3 pos1 = new Vector3(other.transform.position.x, other.transform.position.y, other.transform.position.z);
+
 
         while (Vector2.Distance(other.transform.position, pos0) > 0.1f || Vector2.Distance(transform.position, pos1) > 0.1f)
         {
             transform.position += (pos1 - transform.position) * mSwapSpeed * Time.deltaTime;
             other.transform.position += (pos0 - other.transform.position) * mSwapSpeed * Time.deltaTime;
-            yield return new WaitForSeconds(Time.deltaTime *0.005f);
+          yield return new WaitForSeconds(Time.deltaTime);
         }
+        transform.position = pos0;
+        other.transform.position = pos1;
 
-        transform.position = pos1;
-        other.transform.position = pos0;
+        SwapSprite(previousSelected.render);
+        yield return new WaitForSeconds(0.3f);
 
         other.ClearAllMatches();
-
         other.Deselect();
         ClearAllMatches();
-        mBoard.SetMoveCount(-1);
+        //mBoard.SetMoveCount(-1);
 
         mIsSwaping = false;
     }
